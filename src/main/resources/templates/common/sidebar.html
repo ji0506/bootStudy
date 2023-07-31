@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- Sidebar -->
+	<div id="sidebar">
+		<header>
+			<a href="/main/main.do">			
+				<!--<img src="../img/logo.png" width="120" height="60"></img>-->
+				 Study Cafe
+			</a>
+		</header>
+		<ul class="nav">
+			<li th:if="${katTargetNo == 0}" class="active">
+				<a class="eng" href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a>
+			</li>
+			<li th:unless="${katTargetNo == 0}">
+				<a class="eng" href="${contextPath}/main/main.do"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a>
+			</li>
+			<th th:each="item : ${katlist}">
+				<li th:if="${katTargetNo == item.kateNo}" class="active">
+					<a href="${contextPath}/board/list.do?katNo=${item.kateNo}">[[${item.kateName}]]</a>
+				</li>
+				<li th:unless="${katTargetNo == item.kateNo}">
+					<a href="${contextPath}/board/list.do?katNo=${item.kateNo}">[[${item.kateName}]]</a>
+				</li>
+			</th>
+			<th th:if="${userId == 'admin'}">
+				<li th:if="${1 == katTargetNo}" class="active">
+					<a href="${contextPath}/admin/list.do?katNo=1">공지사항</a>
+				</li>
+				<li th:unless="${1 == katTargetNo}">
+					<a href="${contextPath}/admin/list.do?katNo=1">공지사항</a>
+				</li>
+				<li th:if="${2 == katTargetNo}" class="active">
+					<a href="${contextPath}/admin/memberlist.do?katNo=2">회원목록</a>
+				</li>
+				<li th:unless="${2 == katTargetNo}">
+					<a href="${contextPath}/admin/memberlist.do?katNo=2">회원목록</a>
+				</li>
+				<li th:if="${100 == katTargetNo}" class="active">
+					<a href="${contextPath}/admin/kate.do?katNo=100">카테고리</a>
+				</li>
+				<li th:unless="${100 == katTargetNo}" >
+					<a href="${contextPath}/admin/kate.do?katNo=100">카테고리</a>
+				</li>
+			</th>
+		</ul>
+	</div>
+</html>

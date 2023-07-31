@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width" , initial-scale="1">
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" th:href="@{/css/sidebar.css}">
+<link rel="stylesheet" th:href="@{/css/main.css}">
+<title>Study & Cafe</title>
+</head>
+<body>
+	<div id="viewport">
+		<!--SideBar-->  
+		<div th:insert="~{/common/sidebar}"></div>
+		<!-- Content-->
+		<div id="content">
+			<div th:insert="~{/common/top}"></div>			
+			<!-- Content-->
+			<div class="main_back">			
+				<div class="container">
+					<h1 style="font-family: Namum; text-align: center;">좌석배치</h1>
+					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
+					<div class="wrapper" style="text-align:center;margin-top: 10px;">
+						<table style="width:80%;margin-left: auto;margin-right: auto;">
+							<tr>
+								<th:block th:each="item, stat : ${list}" th:if="${stat.index} &lt; 8">
+								    <td>
+								        <div th:class="${item.seatComment == '02'} ? 'card active' : 'card'">
+								            <div class="card-head">
+								                <p>
+													좌석 <span th:text="${item.seatNo}"></span>
+												</p>
+											</div>
+								            <div class="card-main">
+								                <p th:text="${item.comment.seatCommentData}"></p>
+								            </div>
+								        </div>
+								    </td>
+								</th:block>
+							</tr>
+							<tr>
+								<th:block th:each="item, stat : ${list}" th:if="${stat.index} >= 8 and ${stat.index} < 16 ">
+									<td>
+										<div th:class="${item.seatComment == '02'} ? 'card active' : 'card'">
+											<div class="card-head">
+												<p>
+													좌석 <span th:text="${item.seatNo}"></span>
+												</p>
+											</div>
+											<div class="card-main">
+												<p th:text="${item.comment.seatCommentData}"></p>
+											</div>
+										</div>
+									</td>
+								</th:block>
+							</tr>
+						</table>
+					</div>
+
+					<div style="border-bottom: 1px solid #bdbdbd42; margin:5px 20px 20px 20px"></div>
+
+					<table style="width:85%;margin-left: auto;margin-right: auto;">
+						<colgroup>
+							<col width="30%" />
+							<col width="70%" />
+						</colgroup>						
+						<tbody>
+							<tr>
+								<td>
+									<div class="statis">
+									 	<div class="statis-head">
+									    	<h2 class="statis-title" style="font-family: Namum;">좌석 현황</h2>
+										</div>
+									 	<div class="statis-body">
+											<p class="title-1">남은좌석수</p>
+											<p class="value-1" th:text="${statis.SeatCnt} ">
+											</p>
+											<p class="title-2">좌석수</p>
+											<p class="value-2" th:text="${statis.TotalCnt}">
+											</p>
+									  	</div>
+									</div>								
+								</td>
+								<td>
+									<div class="notice">
+										<p class="title">최신글보기</p>
+										<a href="${contextPath}/board/list.do?katNo=3" class="btn">더보기</a>
+										<table class="notice-list">
+											<tbody>
+												<th:block th:each="item, view : ${viewlist}" >
+													<tr>
+														<td class="subject">
+															<a href="${contextPath}/board/view.do?brdNo=${item.brdNo}&katNo=${3}" title="게시글 상세보기">[[${item.title}]]</a>
+														</td>
+														<td>[[${item.userId}]]</td>
+														<td>[[${item.regDate}]]</td>
+														<td>[[${item.cnt}]]</td>
+													</tr>
+												</th:block>
+											</tbody>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div> <!--Content End  -->
+		<input type="hidden" id="userId" name="userId" th:value="${userId}">
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/main.js"/>"></script>
+</body>
+</html>

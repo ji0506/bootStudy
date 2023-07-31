@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		function toggleLogout() {
+			var logoutText = document.getElementById("logoutText");
+			if (logoutText.innerText === "로그아웃") {
+				logoutText.innerText = "로그인";
+				// TODO: 로그아웃 동작 추가
+			} else {
+				logoutText.innerText = "로그아웃";
+				// TODO: 로그인 동작 추가
+			}
+		}
+	
+		$(document).ready(function () {
+			$('#btn').click(function () {
+				$('#slideTogglebox').slideToggle();
+			});
+		});
+	
+	</script>
+	
+	<link rel="stylesheet" th:href="@{/css/toggle.css}" />
+		<div th:if="${userId != null}" class="container-fluid">
+			<ul class="nav navbar-nav navbar-right">
+				<li id="btn"><a href="#">[[${userId}]]</a>
+					<ul id="slideTogglebox">
+						<li><a href="/member/updateForm.do">회원정보수정</a></li>
+						<li><a href="/member/logout.do" onclick="toggleLogout()"><span id="logoutText">로그아웃</span></a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	<div class="top">
+		<span class="font-nanum">메뉴 / </span> <a class="font-nanum font-blue">[[${katTargetName}]]	
+		</a>
+	</div>
+
+</html>
